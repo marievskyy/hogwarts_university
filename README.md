@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Хогвартс: Учёба для Слизерина</title>
+    <title>Hogwarts | Slytherin Alumni | Maria Black</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 
@@ -19,14 +19,9 @@
 
         h1, h2 {
             text-align: center;
-            color: #a3c98f; /* Светло-зелёный цвет */
+            color: #a3c98f;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             font-size: 2.5em;
-        }
-
-        h2 {
-            font-size: 1.8em;
-            margin-bottom: 10px;
         }
 
         .section {
@@ -39,11 +34,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
 
-        .section h3 {
-            color: #8ac79a;
-            border-bottom: 1px solid #3b4f37;
-            padding-bottom: 5px;
-        }
+        h3 { color: #8ac79a; border-bottom: 1px solid #3b4f37; }
 
         button {
             background-color: #4a6a5d;
@@ -53,13 +44,10 @@
             margin: 5px;
             cursor: pointer;
             border-radius: 5px;
-            font-size: 1em;
             transition: background-color 0.3s ease;
         }
 
-        button:hover {
-            background-color: #6b8e6b;
-        }
+        button:hover { background-color: #6b8e6b; }
 
         input {
             background-color: #222e24;
@@ -69,38 +57,51 @@
             margin: 5px;
             border-radius: 5px;
             width: calc(100% - 12px);
-            font-size: 1em;
         }
 
-        .score {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #a3c98f;
+        .score { font-size: 1.2em; font-weight: bold; color: #a3c98f; text-align: center; }
+
+        ul { list-style: none; padding: 0; }
+
+        li { margin: 10px 0; display: flex; justify-content: space-between; }
+
+        .completed { text-decoration: line-through; color: #707070; }
+
+        .hourglass {
             text-align: center;
+            margin-top: 20px;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
+        .hourglass .glass {
+            width: 80px;
+            height: 150px;
+            border: 2px solid #5a8f7b;
+            border-radius: 10px;
+            margin: 10px auto;
+            background: linear-gradient(to top, #3b4f37 0%, transparent 50%, #3b4f37 100%);
+            position: relative;
         }
 
-        li {
-            margin: 10px 0;
-            font-size: 1.1em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .hourglass .fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #8ac79a;
+            transition: height 0.3s ease-in-out;
         }
 
-        .completed {
-            text-decoration: line-through;
-            color: #707070;
+        .reward { margin-top: 10px; color: #d4d4d4; font-style: italic; text-align: center; }
+
+        iframe {
+            display: block;
+            margin: 20px auto;
+            border: 2px solid #4a6a5d;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Хогвартс: Учёба для Слизерина</h1>
-    <h2>3-й семестр</h2>
+    <h1>Hogwarts | Slytherin Alumni | Maria Black</h1>
 
     <div class="section">
         <p class="score">Очки для факультета Слизерин: <span id="points">0</span></p>
@@ -110,10 +111,9 @@
         <ul id="tasks">
             <li>
                 <span>Зельеварение: Изучить ферментативные реакции</span>
-                <button onclick="completeTask(this, 10)">Завершить (+10 очков)</button>
+                <button onclick="completeTask(this, 10, 'study')">Завершить (+10 очков)</button>
             </li>
         </ul>
-        <!-- Добавить задание -->
         <input type="text" id="taskInput" placeholder="Название нового задания">
         <input type="number" id="taskPoints" placeholder="Очки">
         <button onclick="addTask()">Добавить задание</button>
@@ -123,29 +123,54 @@
         <ul id="sideQuests">
             <li>
                 <span>Плавание 2 раза в неделю</span>
-                <button onclick="completeTask(this, 5)">Завершить (+5 очков)</button>
+                <button onclick="completeTask(this, 5, 'life')">Завершить (+5 очков)</button>
             </li>
         </ul>
-        <!-- Добавить сайд-квест -->
         <input type="text" id="sideInput" placeholder="Название нового сайд-квеста">
         <input type="number" id="sidePoints" placeholder="Очки">
         <button onclick="addSideQuest()">Добавить сайд-квест</button>
     </div>
 
+    <!-- Песочные часы -->
+    <div class="hourglass">
+        <h3>Учебные задания</h3>
+        <div class="glass">
+            <div class="fill" id="studyFill" style="height: 0;"></div>
+        </div>
+        <p class="reward">Награда: Придумай свою награду</p>
+
+        <h3>Сайд-квесты</h3>
+        <div class="glass">
+            <div class="fill" id="lifeFill" style="height: 0;"></div>
+        </div>
+        <p class="reward">Награда: Придумай свою награду</p>
+    </div>
+
+    <!-- Встроенные видео -->
+    <h3>Видео для вдохновения</h3>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/BMlo8u56VOY?si=NkY2qVe7uWy5yAmk" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/rJf72mokEng?si=K36FJnJqrZbWMM4H" allowfullscreen></iframe>
+
     <script>
         let totalPoints = 0;
+        let studyPoints = 0;
+        let lifePoints = 0;
 
-        // Завершить задание
-        function completeTask(button, points) {
+        function completeTask(button, points, category) {
             totalPoints += points;
             document.getElementById('points').textContent = totalPoints;
 
-            const taskItem = button.parentElement;
-            taskItem.querySelector('span').classList.add('completed');
-            button.remove();
+            if (category === 'study') {
+                studyPoints += points;
+                document.getElementById('studyFill').style.height = studyPoints + 'px';
+            } else {
+                lifePoints += points;
+                document.getElementById('lifeFill').style.height = lifePoints + 'px';
+            }
+
+            button.parentElement.remove();
         }
 
-        // Добавить новое задание по предметам
         function addTask() {
             const taskText = document.getElementById('taskInput').value;
             const taskPoints = parseInt(document.getElementById('taskPoints').value);
@@ -155,15 +180,12 @@
                 const newTask = document.createElement('li');
                 newTask.innerHTML = `
                     <span>${taskText}</span>
-                    <button onclick="completeTask(this, ${taskPoints})">Завершить (+${taskPoints} очков)</button>
+                    <button onclick="completeTask(this, ${taskPoints}, 'study')">Завершить (+${taskPoints} очков)</button>
                 `;
                 tasksList.appendChild(newTask);
-                document.getElementById('taskInput').value = '';
-                document.getElementById('taskPoints').value = '';
             }
         }
 
-        // Добавить новый сайд-квест
         function addSideQuest() {
             const sideText = document.getElementById('sideInput').value;
             const sidePoints = parseInt(document.getElementById('sidePoints').value);
@@ -173,11 +195,9 @@
                 const newQuest = document.createElement('li');
                 newQuest.innerHTML = `
                     <span>${sideText}</span>
-                    <button onclick="completeTask(this, ${sidePoints})">Завершить (+${sidePoints} очков)</button>
+                    <button onclick="completeTask(this, ${sidePoints}, 'life')">Завершить (+${sidePoints} очков)</button>
                 `;
                 sideList.appendChild(newQuest);
-                document.getElementById('sideInput').value = '';
-                document.getElementById('sidePoints').value = '';
             }
         }
     </script>
